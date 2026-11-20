@@ -5,6 +5,10 @@
     padding: 0;
     margin: 0;
 }
+.scrollbar{
+    scrollbar-width: thin;
+    scrollbar-color: rgb(0, 99, 99) #f5f5f5;
+}
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
@@ -14,6 +18,7 @@ body{
     justify-content: center;
     align-items: center;
 }
+/*****INDEX*****/
 header{
     display: flex;
     flex-direction: row;
@@ -23,7 +28,7 @@ header{
     background-color: #ffffff44;
     width: 80%;
     border-radius: 90px;
-    top: 50px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
     position: fixed;
@@ -45,14 +50,14 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #ffffff44;
+    background-color: #ffffffa1;
     border-radius: 90px;
     width: 50%;
 }
 .search-bar-icon{
     width: 20px;
     height: 20px;
-    background-color: #ffffff44;
+    background-color: transparent;
     border-radius: 90px;
     display: flex;
     justify-content: center;
@@ -85,6 +90,914 @@ nav a:hover{
 }
 main{
     width: 100%;
-    margin-top: 160px;
     z-index: 0;
+}
+.banner{
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+.prouctsMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+}
+.displayBanner{
+    margin-top: -250px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.cardProduct {
+    box-sizing: border-box;
+    width: 250px;
+    height: 300px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background-color: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.cardProduct:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    border-color: #000000;
+}
+
+.cardProduct img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    background-color: #f5f5f5;
+    border-radius: 14px;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.cardProduct h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #222;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardProduct span {
+    margin-top: auto;          
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: rgb(0, 99, 99);
+}oductSecundary{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.limitMain{
+    width: 80%;
+}
+
+.carrosselContainer{
+    max-width: 100%;
+}
+#bannerCard, #cardPromo, #cardVend {
+    display: flex;              
+    gap: 20px;                  
+    overflow-x: auto;           
+    scroll-behavior: smooth;    
+    padding: 20px;
+    scrollbar-width: none; 
+  }
+  #bannerCard::-webkit-scrollbar, #cardPromo::-webkit-scrollbar, #cardVend::-webkit-scrollbar {
+    display: none;
+  }
+  .btn-bolinha {
+    position: absolute;
+    transform: translateY(-50%);
+    
+    width: 45px;             /* Largura e altura iguais formam o círculo */
+    height: 45px;
+    border-radius: 50%;      /* Deixa perfeitamente redondo */
+    
+    background-color: #333;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s, transform 0.2s;
+    z-index: 10;             /* Garante que fique por cima dos cards */
+  }
+  .right{
+    right: 50px;             
+  }
+  .left{
+    left: 50px;         
+  }
+  .limitMain section.carrosselContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+  .btn-bolinha:hover {
+    background-color: #000;
+    transform: translateY(-50%) scale(1.08); /* Aumenta levemente ao passar o mouse */
+  }
+  .cardFooter {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.cardFooter span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgb(0, 99, 99);
+}
+
+.btnCarrinho {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btnCarrinho:hover {
+    background-color: rgb(0, 99, 99);
+    transform: scale(1.1);
+}
+
+.btnCarrinho:active {
+    transform: scale(0.95);
+}
+
+/* feedback ao adicionar */
+.btnCarrinho.adicionado {
+    background-color: rgb(0, 99, 99);
+    animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/*******LOGUIN***********/
+/* Login - complementa o style.css (carregar depois dele) */
+
+.loginMain {
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 140px 20px 60px; /* espaço para o header fixo */
+}
+
+.loginCard {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.loginCard h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.loginSub {
+    margin: 6px 0 24px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.campo label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.campo input,
+.campoSenha {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d4d4d4;
+    border-radius: 12px;
+    background-color: #f5f5f5;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input {
+    padding: 12px 14px;
+    outline: none;
+}
+
+.campoSenha {
+    display: flex;
+    align-items: center;
+}
+
+.campoSenha input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    min-width: 0;
+}
+
+.campo input:focus,
+.campoSenha:focus-within {
+    border-color: rgb(0, 99, 99);
+    box-shadow: 0 0 0 3px rgba(0, 99, 99, 0.18);
+}
+
+.campo.invalido input,
+.campo.invalido .campoSenha {
+    border-color: #c62828;
+}
+
+.btnOlho {
+    width: 40px;
+    height: 40px;
+    margin-right: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btnOlho:hover {
+    background-color: #e8e8e8;
+}
+
+.btnOlho:focus-visible,
+.btnEntrar:focus-visible,
+.linkSecundario:focus-visible {
+    outline: 3px solid rgba(0, 99, 99, 0.4);
+    outline-offset: 2px;
+}
+
+.erro {
+    min-height: 1em;
+    font-size: 0.82rem;
+    color: #c62828;
+}
+
+.erroGeral {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.linhaOpcoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+}
+
+.lembrar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.lembrar input {
+    accent-color: rgb(0, 99, 99);
+    width: 16px;
+    height: 16px;
+}
+
+.linkSecundario {
+    font-weight: 600;
+    color: rgb(0, 99, 99);
+}
+
+.linkSecundario:hover {
+    text-decoration: underline;
+}
+
+.btnEntrar {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 90px;
+    background-color: rgb(0, 99, 99);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btnEntrar:hover {
+    background-color: rgb(0, 76, 76);
+}
+
+.btnEntrar:active {
+    transform: scale(0.98);
+}
+
+.btnEntrar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.criarConta {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 0.92rem;
+    color: #555;
+}
+
+@media (max-width: 600px) {
+    .loginCard {
+        padding: 24px 20px;
+    }
+}
+
+/******ASSISTENCIA*******/
+/* Assistência - complementa o style.css (carregar depois dele) */
+
+:root {
+    --verde: rgb(0, 99, 99);
+    --verde-escuro: rgb(0, 76, 76);
+    --verde-claro: #e0f0f0;
+    --azul: #2563eb;
+    --azul-claro: #e3ecfd;
+    --linha: #e2e2e2;
+    --linha-hora: #ececec;
+    --altura-hora: 90px;
+    --largura-horas: 70px;
+}
+
+.assistMain {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 130px 20px 40px; /* espaço para o header fixo */
+    display: flex;
+    justify-content: center;
+}
+
+.calendario {
+    width: 95%;
+    max-width: 1500px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid var(--linha);
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* ---------- Barra superior ---------- */
+.calBarra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--linha);
+}
+
+.calNavegacao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calNavegacao h2 {
+    margin-left: 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #222;
+    text-transform: capitalize;
+}
+
+.btnCal,
+.btnCalIcone {
+    border: 1px solid #d4d4d4;
+    background-color: #ffffff;
+    border-radius: 90px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btnCal {
+    padding: 8px 18px;
+    font-weight: 600;
+}
+
+.btnCalIcone {
+    width: 36px;
+    height: 36px;
+}
+
+.btnCal:hover,
+.btnCalIcone:hover {
+    background-color: var(--verde-claro);
+    border-color: var(--verde);
+}
+
+.calFiltros {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #d4d4d4;
+    border-radius: 90px;
+    background-color: #ffffff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.chip:hover {
+    border-color: var(--verde);
+}
+
+.chip.ativo {
+    background-color: var(--verde);
+    border-color: var(--verde);
+    color: #fff;
+}
+
+.chip.ativo .ponto {
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.ponto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ponto.atendimento {
+    background-color: var(--verde);
+}
+
+.ponto.assistencia {
+    background-color: var(--azul);
+}
+
+.calResumo {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    color: #555;
+    background-color: #fafafa;
+    border-bottom: 1px solid var(--linha);
+}
+
+/* ---------- Grade ---------- */
+.calRolagem {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 150px);
+    min-height: 600px;
+}
+
+.calGrade {
+    display: grid;
+    grid-template-columns: var(--largura-horas) repeat(7, minmax(130px, 1fr));
+    min-width: 1000px;
+}
+
+.calCabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--linha);
+}
+
+.diaTitulo {
+    padding: 12px 8px;
+    text-align: center;
+    border-left: 1px solid var(--linha-hora);
+}
+
+.diaTitulo .diaSemana {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    text-transform: capitalize;
+}
+
+.diaTitulo .diaNumero {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    height: 40px;
+    margin-top: 2px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.diaTitulo.hoje .diaNumero {
+    background-color: var(--verde);
+    color: #fff;
+}
+
+.diaTitulo.hoje .diaSemana {
+    color: var(--verde);
+    font-weight: 600;
+}
+
+.calCorpo {
+    position: relative;
+}
+
+.colHoras {
+    display: flex;
+    flex-direction: column;
+}
+
+.horaRotulo {
+    height: var(--altura-hora);
+    box-sizing: border-box;
+    padding: 0 10px;
+    text-align: right;
+    font-size: 0.8rem;
+    color: #666;
+    transform: translateY(-8px);
+}
+
+.colDia {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--linha-hora);
+}
+
+.colDia.fechado {
+    background: repeating-linear-gradient(135deg, #f7f7f7, #f7f7f7 8px, #f0f0f0 8px, #f0f0f0 16px);
+}
+
+.celula {
+    height: var(--altura-hora);
+    box-sizing: border-box;
+    padding: 4px;
+    border-top: 1px solid var(--linha-hora);
+}
+
+/* ---------- Horários ---------- */
+.slot {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    padding: 8px 10px;
+    border: none;
+    border-left: 5px solid transparent;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 0.85rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.slot .slotHora {
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.slot .slotTipo {
+    font-size: 0.82rem;
+}
+
+.slot .slotStatus {
+    font-size: 0.78rem;
+    opacity: 0.85;
+}
+
+.slot.livre {
+    cursor: pointer;
+}
+
+.slot.livre:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.slot.livre.atendimento {
+    background-color: var(--verde-claro);
+    border-left-color: var(--verde);
+}
+
+.slot.livre.assistencia {
+    background-color: var(--azul-claro);
+    border-left-color: var(--azul);
+}
+
+.slot.ocupado {
+    background-color: #ececec;
+    border-left-color: #b5b5b5;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.slot.ocupado * {
+    color: #777;
+}
+
+.slot.passado {
+    background-color: #f5f5f5;
+    border-left-color: #dcdcdc;
+    cursor: default;
+}
+
+.slot.passado * {
+    color: #aaa;
+}
+
+.slot.meu {
+    cursor: pointer;
+    background-color: var(--verde);
+    border-left-color: #003c3c;
+}
+
+.slot.meu.assistencia {
+    background-color: var(--azul);
+    border-left-color: #153f9f;
+}
+
+.slot.meu * {
+    color: #fff;
+}
+
+.slot.meu:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.slot:focus-visible,
+.chip:focus-visible,
+.btnCal:focus-visible,
+.btnCalIcone:focus-visible {
+    outline: 3px solid rgba(0, 99, 99, 0.45);
+    outline-offset: 2px;
+}
+
+.slotVazio {
+    width: 100%;
+    height: 100%;
+}
+
+/* linha do horário atual */
+.linhaAgora {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #d32f2f;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.linhaAgora::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #d32f2f;
+}
+
+/* ---------- Diálogo ---------- */
+dialog {
+    margin: auto; /* o reset global (* { margin: 0 }) tira o centro padrão */
+    width: min(440px, calc(100% - 32px));
+    box-sizing: border-box;
+    padding: 28px;
+    border: 1px solid var(--linha);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+dialog h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.dialogHorario {
+    margin: 4px 0 18px;
+    font-size: 0.95rem;
+    color: #555;
+    text-transform: capitalize;
+}
+
+.campoAg {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.campoAg label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.campoAg input,
+.campoAg textarea {
+    padding: 11px 13px;
+    border: 1px solid #d4d4d4;
+    border-radius: 12px;
+    background-color: #f5f5f5;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campoAg input:focus,
+.campoAg textarea:focus {
+    border-color: var(--verde);
+    box-shadow: 0 0 0 3px rgba(0, 99, 99, 0.18);
+}
+
+#blocoMeu p {
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+.erroAg {
+    display: block;
+    min-height: 1em;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #c62828;
+}
+
+.dialogBotoes {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btnPrim,
+.btnSec,
+.btnPerigo {
+    padding: 10px 20px;
+    border-radius: 90px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btnPrim {
+    border: none;
+    background-color: var(--verde);
+    color: #fff;
+}
+
+.btnPrim:hover {
+    background-color: var(--verde-escuro);
+}
+
+.btnSec {
+    border: 1px solid #d4d4d4;
+    background-color: #fff;
+}
+
+.btnSec:hover {
+    background-color: #f0f0f0;
+}
+
+.btnPerigo {
+    border: 1px solid #c62828;
+    background-color: #fff;
+    color: #c62828;
+}
+
+.btnPerigo:hover {
+    background-color: #fdecec;
+}
+
+.btnPrim:focus-visible,
+.btnSec:focus-visible,
+.btnPerigo:focus-visible {
+    outline: 3px solid rgba(0, 99, 99, 0.45);
+    outline-offset: 2px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ---------- Aviso ---------- */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translate(-50%, 20px);
+    padding: 12px 22px;
+    border-radius: 90px;
+    background-color: #222;
+    color: #fff;
+    font-size: 0.95rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 30;
+}
+
+.toast.visivel {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slot,
+    .toast {
+        transition: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .assistMain {
+        padding: 110px 8px 30px;
+    }
+
+    .calendario {
+        width: 100%;
+    }
+}
+
+footer{
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+.textFooter{
+    background-color: rgb(0, 99, 99);
+    padding: 20px;
 }

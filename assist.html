@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scrollbar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavePoint - Assistência</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assist.css">
+</head>
+
+<body>
+    <header>
+        <section>
+            <h1 class="logo">Logo</h1>
+        </section>
+        <section class="search-bar">
+            <div class="search-bar-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <input class="search-bar-input" type="text" placeholder="Pesquisar produto" />
+        </section>
+        <nav>
+            <a href="index.html">
+                <li>Home</li>
+            </a>
+            <a href="assist.html">
+                <li>Assistência</li>
+            </a>
+            <a href="login.html">
+                <li>Logar</li>
+            </a>
+        </nav>
+    </header>
+
+    <main class="assistMain">
+        <section class="calendario" aria-label="Agenda de atendimento e assistência técnica">
+
+            <div class="calBarra">
+                <div class="calNavegacao">
+                    <button type="button" id="btnHoje" class="btnCal">Hoje</button>
+                    <button type="button" id="btnSemanaAnterior" class="btnCalIcone" aria-label="Semana anterior"
+                        title="Semana anterior">&#10094;</button>
+                    <button type="button" id="btnSemanaSeguinte" class="btnCalIcone" aria-label="Próxima semana"
+                        title="Próxima semana">&#10095;</button>
+                    <h2 id="tituloPeriodo" aria-live="polite"></h2>
+                </div>
+
+                <div class="calFiltros" role="group" aria-label="Filtrar por tipo">
+                    <button type="button" class="chip ativo" data-filtro="todos">Todos</button>
+                    <button type="button" class="chip" data-filtro="atendimento">
+                        <span class="ponto atendimento"></span>Atendimento
+                    </button>
+                    <button type="button" class="chip" data-filtro="assistencia">
+                        <span class="ponto assistencia"></span>Assistência técnica
+                    </button>
+                </div>
+            </div>
+
+            <div class="calResumo" id="resumoSemana"></div>
+
+            <div class="calRolagem">
+                <div class="calGrade calCabecalho" id="cabecalhoDias"></div>
+                <div class="calGrade calCorpo" id="corpoCalendario"></div>
+            </div>
+        </section>
+    </main>
+
+    <dialog id="dialogAgendamento" aria-labelledby="dialogTitulo">
+        <form id="formAgendamento" method="dialog" novalidate>
+            <h3 id="dialogTitulo"></h3>
+            <p id="dialogHorario" class="dialogHorario"></p>
+
+            <div id="blocoNovo">
+                <div class="campoAg">
+                    <label for="agNome">Nome</label>
+                    <input id="agNome" type="text" autocomplete="name" required />
+                </div>
+                <div class="campoAg">
+                    <label for="agTelefone">Telefone ou WhatsApp</label>
+                    <input id="agTelefone" type="tel" autocomplete="tel" placeholder="(16) 90000-0000" required />
+                </div>
+                <div class="campoAg">
+                    <label for="agDescricao" id="agDescricaoLabel"></label>
+                    <textarea id="agDescricao" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div id="blocoMeu" hidden>
+                <p id="meuResumo"></p>
+            </div>
+
+            <small class="erroAg" id="erroAg" role="alert"></small>
+
+            <div class="dialogBotoes">
+                <button type="button" class="btnSec" id="btnFechar">Fechar</button>
+                <button type="button" class="btnPerigo" id="btnCancelar" hidden>Cancelar agendamento</button>
+                <button type="submit" class="btnPrim" id="btnConfirmar">Confirmar agendamento</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer>
+        <section class="textFooter"><strong style="color: #fff;">Projeto SavePoint</strong></section>
+    </footer>
+</body>
+
+<script src="scriptAssist.js"></script>
+
+</html>

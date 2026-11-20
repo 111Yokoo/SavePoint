@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scrollbar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavePoint - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <section>
+            <h1 class="logo">Logo</h1>
+        </section>
+        <nav>
+            <a href="index.html">
+                <li>Home</li>
+            </a>
+            <a href="assist.html">
+                <li>Assistência</li>
+            </a>
+            <a href="login.html">
+                <li>Logar</li>
+            </a>
+        </nav>
+    </header>
+
+    <main class="loginMain">
+        <section class="loginCard">
+            <h2>Entrar na sua conta</h2>
+            <p class="loginSub">Acesse para acompanhar pedidos e finalizar compras.</p>
+
+            <form id="formLogin" novalidate>
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@email.com"
+                        required />
+                    <small class="erro" id="erroEmail" role="alert"></small>
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <div class="campoSenha">
+                        <input id="senha" name="senha" type="password" autocomplete="current-password"
+                            placeholder="Digite sua senha" minlength="6" required />
+                        <button type="button" id="btnMostrarSenha" class="btnOlho" aria-label="Mostrar senha"
+                            title="Mostrar senha">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <small class="erro" id="erroSenha" role="alert"></small>
+                </div>
+
+                <div class="linhaOpcoes">
+                    <label class="lembrar">
+                        <input type="checkbox" id="lembrar" />
+                        Lembrar de mim
+                    </label>
+                    <a href="recuperar-senha.html" class="linkSecundario">Esqueci a senha</a>
+                </div>
+
+                <small class="erro erroGeral" id="erroGeral" role="alert"></small>
+
+                <button type="submit" class="btnEntrar" id="btnEntrar">Entrar</button>
+            </form>
+
+            <p class="criarConta">
+                Ainda não tem conta?
+                <a href="cadastro.html" class="linkSecundario">Criar conta</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <section class="textFooter"><strong style="color: #fff;">Projeto SavePoint</strong></section>
+    </footer>
+</body>
+
+<script src="scriptLogin.js"></script>
+
+</html>
