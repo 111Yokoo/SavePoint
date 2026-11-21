@@ -52,101 +52,47 @@ const produtos = [
 const bannerCards = document.getElementById("bannerCard");
 const cardPromo = document.getElementById("cardPromo");
 const cardVend = document.getElementById("cardVend");
-for (let i = 0; i < produtos.length; i++) {
-  const valorFormatado = produtos[i].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  console.log("entrou")
-  bannerCards.innerHTML += `
-                <section class="cardProduct">
-                    <img src="${produtos[i].imagem}" alt="${produtos[i].nome}" />
-                    <h3>${produtos[i].nome}</h3>
-                      <div class="cardFooter">
-                          <span>${valorFormatado}</span>
-                          <button class="btnCarrinho" data-id="${produtos[i].id}" aria-label="Adicionar ${produtos[i].nome} ao carrinho" title="Adicionar ao carrinho">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" color="#fff">
-                              <circle cx="9" cy="21" r="1"></circle>
-                              <circle cx="20" cy="21" r="1"></circle>
-                              <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"></path>
-                            </svg>
-                          </button>
-                      </div>
-                  </section>
+
+// Monta o card de um produto. Clicar no card abre produto.html?id=posição
+function criarCard(produto, i) {
+  const valorFormatado = produto.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  const nome = produto.nome.replace(/"/g, "&quot;"); // evita quebrar os atributos HTML
+  return `
+    <section class="cardProduct" onclick="window.location.href='produto.html?id=${i}'">
+      <img src="${produto.imagem}" alt="${nome}" />
+      <h3>${produto.nome}</h3>
+      <div class="cardFooter">
+        <span>${valorFormatado}</span>
+        <button class="btnCarrinho" onclick="event.stopPropagation()" aria-label="Adicionar ${nome} ao carrinho" title="Adicionar ao carrinho">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"></path>
+          </svg>
+        </button>
+      </div>
+    </section>
   `;
-  cardPromo.innerHTML += `
-                <section class="cardProduct">
-                    <img src="${produtos[i].imagem}" alt="${produtos[i].nome}" />
-                    <h3>${produtos[i].nome}</h3>
-                      <div class="cardFooter">
-                          <span>${valorFormatado}</span>
-                          <button class="btnCarrinho" data-id="${produtos[i].id}" aria-label="Adicionar ${produtos[i].nome} ao carrinho" title="Adicionar ao carrinho">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <circle cx="9" cy="21" r="1"></circle>
-                              <circle cx="20" cy="21" r="1"></circle>
-                              <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"></path>
-                            </svg>
-                          </button>
-                      </div>
-                  </section>
-  `;
-  cardVend.innerHTML += `
-    <section class="cardProduct">
-                    <img src="${produtos[i].imagem}" alt="${produtos[i].nome}" />
-                    <h3>${produtos[i].nome}</h3>
-                      <div class="cardFooter">
-                          <span>${valorFormatado}</span>
-                          <button class="btnCarrinho" data-id="${produtos[i].id}" aria-label="Adicionar ${produtos[i].nome} ao carrinho" title="Adicionar ao carrinho">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <circle cx="9" cy="21" r="1"></circle>
-                              <circle cx="20" cy="21" r="1"></circle>
-                              <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"></path>
-                            </svg>
-                          </button>
-                      </div>
-                  </section>
-`;
 }
 
-const btnAvancarBanner = document.getElementById("btnAvancarBanner");
-btnAvancarBanner.addEventListener("click", () => {
-  bannerCards.scrollBy({
-    left: 270,
-    behavior: "smooth"
-  });
-});
-const btnAvancarPromo = document.getElementById("btnAvancarPromo");
-btnAvancarPromo.addEventListener("click", () => {
-  cardPromo.scrollBy({
-    left: 270,
-    behavior: "smooth"
-  });
-});
-const btnAvancarVend = document.getElementById("btnAvancarVend");
-btnAvancarVend.addEventListener("click", () => {
-  cardVend.scrollBy({
-    left: 270,
-    behavior: "smooth"
-  });
-});
+let html = "";
+for (let i = 0; i < produtos.length; i++) {
+  html += criarCard(produtos[i], i);
+}
+bannerCards.innerHTML = html;
+cardPromo.innerHTML = html;
+cardVend.innerHTML = html;
 
+// Setas dos carrosséis
+function ligarSetas(idVoltar, idAvancar, container) {
+  document.getElementById(idVoltar).addEventListener("click", () => {
+    container.scrollBy({ left: -270, behavior: "smooth" });
+  });
+  document.getElementById(idAvancar).addEventListener("click", () => {
+    container.scrollBy({ left: 270, behavior: "smooth" });
+  });
+}
 
-const btnVoltarBanner = document.getElementById("btnVoltarBanner");
-btnVoltarBanner.addEventListener("click", () => {
-  bannerCards.scrollBy({
-    left: -270,
-    behavior: "smooth"
-  });
-});
-const btnVoltarPromo = document.getElementById("btnVoltarPromo");
-btnVoltarPromo.addEventListener("click", () => {
-  cardPromo.scrollBy({
-    left: -270,
-    behavior: "smooth"
-  });
-});
-const btnVoltarVend = document.getElementById("btnVoltarVend");
-btnVoltarVend.addEventListener("click", () => {
-  cardVend.scrollBy({
-    left: -270,
-    behavior: "smooth"
-  });
-});
-
+ligarSetas("btnVoltarBanner", "btnAvancarBanner", bannerCards);
+ligarSetas("btnVoltarPromo", "btnAvancarPromo", cardPromo);
+ligarSetas("btnVoltarVend", "btnAvancarVend", cardVend);

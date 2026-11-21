@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scrollbar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavePoint - Produto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="produto.css">
+</head>
+
+<body>
+    <header>
+        <section>
+            <h1 class="logo">Logo</h1>
+        </section>
+        <section class="search-bar">
+            <div class="search-bar-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <input class="search-bar-input" type="text" placeholder="Pesquisar produto" />
+        </section>
+        <nav>
+            <a href="index.html">
+                <li>Home</li>
+            </a>
+            <a href="assist.html">
+                <li>Assistência</li>
+            </a>
+            <a href="login.html">
+                <li>Logar</li>
+            </a>
+        </nav>
+    </header>
+
+    <main class="produtoMain">
+        <p class="caminho"><a href="index.html" class="linkVerde">Home</a> &gt; <span id="caminhoNome"></span></p>
+
+        <section class="produtoCard">
+            <div class="produtoImagem">
+                <span>Imagem do produto</span>
+                <img id="imgProduto" alt="" />
+            </div>
+
+            <div class="produtoInfo">
+                <h2 id="nomeProduto"></h2>
+                <p class="preco" id="precoProduto"></p>
+                <p class="parcela" id="parcelaProduto"></p>
+
+                <p class="descricao" id="descProduto"></p>
+
+                <ul class="beneficios">
+                    <li>Frete grátis para todo o Brasil</li>
+                    <li>12 meses de garantia</li>
+                    <li>Assistência técnica na própria loja</li>
+                </ul>
+
+                <div class="quantidade">
+                    <span>Quantidade</span>
+                    <div class="quantidadeControle">
+                        <button type="button" id="btnMenos" aria-label="Diminuir quantidade">-</button>
+                        <strong id="qtd">1</strong>
+                        <button type="button" id="btnMais" aria-label="Aumentar quantidade">+</button>
+                    </div>
+                </div>
+
+                <div class="acoes">
+                    <button type="button" class="btnComprar" id="btnComprar">Comprar agora</button>
+                    <button type="button" class="btnAdicionar" id="btnAdicionar">Adicionar ao carrinho</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <section class="textFooter"><strong style="color: #fff;">Projeto SavePoint</strong></section>
+    </footer>
+</body>
+
+<script src="scriptProduto.js"></script>
+
+</html>

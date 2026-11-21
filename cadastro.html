@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scrollbar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavePoint - Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <header>
+        <section>
+            <h1 class="logo">Logo</h1>
+        </section>
+        <section class="search-bar">
+            <div class="search-bar-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <input class="search-bar-input" type="text" placeholder="Pesquisar produto" />
+        </section>
+        <nav>
+            <a href="index.html">
+                <li>Home</li>
+            </a>
+            <a href="assist.html">
+                <li>Assistência</li>
+            </a>
+            <a href="login.html">
+                <li>Logar</li>
+            </a>
+        </nav>
+    </header>
+
+    <main class="loginMain">
+        <section class="loginCard">
+            <h2>Criar conta</h2>
+            <p class="loginSub">Cadastre-se para comprar e agendar assistência técnica.</p>
+
+            <form id="formCadastro" novalidate>
+                <div class="campo">
+                    <label for="nome">Nome completo</label>
+                    <input id="nome" type="text" autocomplete="name" placeholder="Seu nome" />
+                </div>
+
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input id="email" type="email" autocomplete="email" placeholder="voce@email.com" />
+                </div>
+
+                <div class="campo">
+                    <label for="telefone">Telefone</label>
+                    <input id="telefone" type="tel" autocomplete="tel" placeholder="(16) 90000-0000" />
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+                    <input id="senha" type="password" autocomplete="new-password" placeholder="Crie uma senha" />
+                </div>
+
+                <div class="campo">
+                    <label for="confirmarSenha">Confirmar senha</label>
+                    <input id="confirmarSenha" type="password" autocomplete="new-password"
+                        placeholder="Repita a senha" />
+                </div>
+
+                <small class="erro erroGeral" id="erroGeral" role="alert"></small>
+
+                <button type="submit" class="btnEntrar">Cadastrar</button>
+            </form>
+
+            <p class="criarConta">
+                Já tem conta?
+                <a href="login.html" class="linkSecundario">Entrar</a>
+            </p>
+        </section>
+    </main>
+
+    <div class="line"></div>
+    <footer>
+        <section class="textFooter"><strong style="color: #fff;">Projeto SavePoint</strong></section>
+    </footer>
+</body>
+
+<script src="scriptCadastro.js"></script>
+
+</html>

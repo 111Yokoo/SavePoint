@@ -275,7 +275,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 140px 20px 60px; /* espaço para o header fixo */
+    padding-top: 120px; /* espaço para o header fixo */
 }
 
 .loginCard {
@@ -994,10 +994,207 @@ dialog h3 {
 
 footer{
     width: 100%;
-    margin-top: 20px;
     text-align: center;
 }
 .textFooter{
     background-color: rgb(0, 99, 99);
     padding: 20px;
+}
+.line{
+    width: 100%;
+    height: 500px;
+    background: linear-gradient(to top, rgb(0, 99, 99), #f5f5f5);
+    margin-top: -300px;
+    z-index: -1;
+    position: absolute;
+}
+/* Página de produto - complementa o style.css (carregar depois dele) */
+
+.produtoMain {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 130px 20px 40px; /* espaço para o header fixo */
+}
+
+.caminho {
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.linkVerde {
+    color: rgb(0, 99, 99);
+    font-weight: 600;
+}
+
+.linkVerde:hover {
+    text-decoration: underline;
+}
+
+.produtoCard {
+    display: flex;
+    gap: 32px;
+    padding: 28px;
+    background-color: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.produtoImagem {
+    position: relative;
+    flex: 1;
+    min-height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.produtoImagem span {
+    color: #999;
+}
+
+.produtoImagem img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.produtoInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.produtoInfo h2 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #222;
+}
+
+.preco {
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgb(0, 99, 99);
+}
+
+.parcela {
+    margin-top: -10px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.descricao {
+    line-height: 1.55;
+    color: #333;
+}
+
+.beneficios {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px 16px;
+    background-color: #e0f0f0;
+    border-radius: 12px;
+    font-size: 0.92rem;
+}
+
+.beneficios li::before {
+    content: "✓ ";
+    font-weight: 700;
+    color: rgb(0, 99, 99);
+}
+
+.quantidade {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.quantidadeControle {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d4d4d4;
+    border-radius: 90px;
+    overflow: hidden;
+}
+
+.quantidadeControle button {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background-color: #f5f5f5;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.quantidadeControle button:hover {
+    background-color: #e0f0f0;
+}
+
+.quantidadeControle strong {
+    min-width: 40px;
+    text-align: center;
+}
+
+.acoes {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.btnComprar,
+.btnAdicionar {
+    flex: 1;
+    padding: 13px;
+    border-radius: 90px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btnComprar {
+    border: none;
+    background-color: rgb(0, 99, 99);
+    color: #fff;
+}
+
+.btnComprar:hover {
+    background-color: rgb(0, 76, 76);
+}
+
+.btnAdicionar {
+    border: 2px solid rgb(0, 99, 99);
+    background-color: #fff;
+    color: rgb(0, 99, 99);
+}
+
+.btnAdicionar:hover {
+    background-color: #e0f0f0;
+}
+
+@media (max-width: 800px) {
+    .produtoCard {
+        flex-direction: column;
+    }
+
+    .produtoImagem {
+        min-height: 260px;
+    }
+
+    .acoes {
+        flex-direction: column;
+    }
 }
