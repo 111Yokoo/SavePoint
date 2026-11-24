@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SavePoint - Login</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
@@ -15,13 +16,19 @@
         </section>
         <nav>
             <a href="index.html">
-                <li>Home</li>
+                <li>
+                    Home
+                </li>
             </a>
             <a href="assist.html">
-                <li>Assistência</li>
+                <li>
+                    Assistência
+                </li>
             </a>
             <a href="login.html">
-                <li>Logar</li>
+                <li>
+                    Logar
+                </li>
             </a>
         </nav>
     </header>
@@ -30,6 +37,7 @@
         <section class="loginCard">
             <h2>Entrar na sua conta</h2>
             <p class="loginSub">Acesse para acompanhar pedidos e finalizar compras.</p>
+            <p class="loginSub" style="margin-top: -12px;">Conta de teste: <strong>teste@savepoint.com</strong> / senha <strong>123456</strong></p>
 
             <form id="formLogin" novalidate>
                 <div class="campo">
@@ -75,14 +83,13 @@
             </p>
         </section>
     </main>
-    
-    <div class="line"></div>
 
     <footer>
         <section class="textFooter"><strong style="color: #fff;">Projeto SavePoint</strong></section>
     </footer>
 </body>
 
-<script src="scriptLogin.js"></script>
+<script src="scripts/auth.js"></script>
+<script src="scripts/scriptLogin.js"></script>
 
 </html>

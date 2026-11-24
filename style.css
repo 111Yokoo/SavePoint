@@ -135,9 +135,9 @@ main{
 
 .cardProduct img {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: contain;
-    background-color: #f5f5f5;
+    background-color: #fff;
     border-radius: 14px;
     padding: 6px;
     box-sizing: border-box;
@@ -462,6 +462,7 @@ main{
 
 /******ASSISTENCIA*******/
 /* Assistência - complementa o style.css (carregar depois dele) */
+/* Assistência - complementa o style.css (carregar depois dele) */
 
 :root {
     --verde: rgb(0, 99, 99);
@@ -585,12 +586,12 @@ main{
     display: inline-block;
 }
 
-.ponto.atendimento {
+.ponto.livre {
     background-color: var(--verde);
 }
 
-.ponto.assistencia {
-    background-color: var(--azul);
+.ponto.ocupado {
+    background-color: #b5b5b5;
 }
 
 .calResumo {
@@ -737,14 +738,9 @@ main{
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.slot.livre.atendimento {
+.slot.livre {
     background-color: var(--verde-claro);
     border-left-color: var(--verde);
-}
-
-.slot.livre.assistencia {
-    background-color: var(--azul-claro);
-    border-left-color: var(--azul);
 }
 
 .slot.ocupado {
@@ -772,11 +768,6 @@ main{
     cursor: pointer;
     background-color: var(--verde);
     border-left-color: #003c3c;
-}
-
-.slot.meu.assistencia {
-    background-color: var(--azul);
-    border-left-color: #153f9f;
 }
 
 .slot.meu * {
@@ -864,6 +855,7 @@ dialog h3 {
 }
 
 .campoAg input,
+.campoAg select,
 .campoAg textarea {
     padding: 11px 13px;
     border: 1px solid #d4d4d4;
@@ -877,6 +869,7 @@ dialog h3 {
 }
 
 .campoAg input:focus,
+.campoAg select:focus,
 .campoAg textarea:focus {
     border-color: var(--verde);
     box-shadow: 0 0 0 3px rgba(0, 99, 99, 0.18);
@@ -991,23 +984,124 @@ dialog h3 {
         width: 100%;
     }
 }
+/*****USUARIO***********/
+/* Página de usuário - reaproveita os cards do login.css (carregar depois dele) */
 
-footer{
+.usuarioMain {
+    box-sizing: border-box;
     width: 100%;
-    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 130px 20px 50px; /* espaço para o header fixo */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
-.textFooter{
+
+.usuarioTopo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.usuarioTopo h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.usuarioTopo p {
+    color: #555;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     background-color: rgb(0, 99, 99);
-    padding: 20px;
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: 600;
 }
-.line{
-    width: 100%;
-    height: 500px;
-    background: linear-gradient(to top, rgb(0, 99, 99), #f5f5f5);
-    margin-top: -300px;
-    z-index: -1;
-    position: absolute;
+
+.usuarioCard {
+    max-width: none;
 }
+
+.gridCampos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+}
+
+.msg {
+    display: block;
+    min-height: 1em;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.msg.erro {
+    color: #c62828;
+}
+
+.msg.ok {
+    color: rgb(0, 99, 99);
+    font-weight: 600;
+}
+
+.usuarioCard .btnEntrar {
+    width: auto;
+    padding: 12px 28px;
+}
+
+.acoesConta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btnSair,
+.btnExcluir {
+    padding: 11px 24px;
+    border-radius: 90px;
+    background-color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btnSair {
+    border: 2px solid rgb(0, 99, 99);
+    color: rgb(0, 99, 99);
+}
+
+.btnSair:hover {
+    background-color: #e0f0f0;
+}
+
+.btnExcluir {
+    border: 2px solid #c62828;
+    color: #c62828;
+}
+
+.btnExcluir:hover {
+    background-color: #fdecec;
+}
+
+@media (max-width: 700px) {
+    .gridCampos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/******PROUTO********/
 /* Página de produto - complementa o style.css (carregar depois dele) */
 
 .produtoMain {
@@ -1197,4 +1291,13 @@ footer{
     .acoes {
         flex-direction: column;
     }
+}
+
+footer{
+    width: 100%;
+    text-align: center;
+}
+.textFooter{
+    background-color: rgb(0, 99, 99);
+    padding: 20px;
 }

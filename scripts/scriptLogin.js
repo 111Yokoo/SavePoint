@@ -9,14 +9,24 @@ btnMostrarSenha.addEventListener("click", () => {
   inputSenha.type = inputSenha.type === "password" ? "text" : "password";
 });
 
-// Login de protótipo: só confere se os campos foram preenchidos
+// Login de protótipo: confere com o usuário de teste (ou o que foi salvo)
 form.addEventListener("submit", (evento) => {
   evento.preventDefault();
 
-  if (!inputEmail.value.trim() || !inputSenha.value) {
+  const email = inputEmail.value.trim().toLowerCase();
+  const senha = inputSenha.value;
+
+  if (!email || !senha) {
     erroGeral.textContent = "Preencha e-mail e senha.";
     return;
   }
 
+  const usuario = getUsuario();
+  if (email !== usuario.email.toLowerCase() || senha !== usuario.senha) {
+    erroGeral.textContent = "E-mail ou senha incorretos.";
+    return;
+  }
+
+  entrar();
   window.location.href = "index.html";
 });

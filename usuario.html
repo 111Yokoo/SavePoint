@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scrollbar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavePoint - Minha conta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <section>
+            <h1 class="logo"><a href="index.html">SavePoint</a></h1>
+        </section>
+        <nav>
+            <a href="index.html">
+                <li>
+                    Home
+                </li>
+            </a>
+            <a href="assist.html">
+                <li>
+                    Assistência
+                </li>
+            </a>
+            <a href="login.html">
+                <li>
+                    Logar
+                </li>
+            </a>
+        </nav>
+    </header>
+
+    <main class="usuarioMain">
+        <section class="usuarioTopo">
+            <div>
+                <h2 id="topoNome"></h2>
+                <p id="topoEmail"></p>
+            </div>
+        </section>
+
+        <section class="loginCard usuarioCard">
+            <h2>Meus dados</h2>
+            <p class="loginSub">Atualize suas informações cadastrais.</p>
+
+            <form id="formDados" novalidate>
+                <div class="gridCampos">
+                    <div class="campo">
+                        <label for="nome">Nome completo</label>
+                        <input id="nome" type="text" autocomplete="name" />
+                    </div>
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" autocomplete="email" />
+                    </div>
+                    <div class="campo">
+                        <label for="rg">RG</label>
+                        <input id="rg" type="text" />
+                    </div>
+                    <div class="campo">
+                        <label for="cpf">CPF</label>
+                        <input id="cpf" type="text" />
+                    </div>
+                    <div class="campo">
+                        <label for="nascimento">Data de nascimento</label>
+                        <input id="nascimento" type="date" />
+                    </div>
+                    <div class="campo">
+                        <label for="telefone">Telefone</label>
+                        <input id="telefone" type="tel" autocomplete="tel" />
+                    </div>
+                </div>
+
+                <small class="msg" id="msgDados" role="alert"></small>
+                <button type="submit" class="btnEntrar">Salvar alterações</button>
+            </form>
+        </section>
+
+        <section class="loginCard usuarioCard">
+            <h2>Alterar senha</h2>
+            <p class="loginSub">Informe a senha atual para definir uma nova.</p>
+
+            <form id="formSenha" novalidate>
+                <div class="gridCampos">
+                    <div class="campo">
+                        <label for="senhaAtual">Senha atual</label>
+                        <input id="senhaAtual" type="password" autocomplete="current-password" />
+                    </div>
+                    <div class="campo">
+                        <label for="novaSenha">Nova senha</label>
+                        <input id="novaSenha" type="password" autocomplete="new-password" />
+                    </div>
+                    <div class="campo">
+                        <label for="confirmarNova">Confirmar nova senha</label>
+                        <input id="confirmarNova" type="password" autocomplete="new-password" />
+                    </div>
+                </div>
+
+                <small class="msg" id="msgSenha" role="alert"></small>
+                <button type="submit" class="btnEntrar">Alterar senha</button>
+            </form>
+        </section>
+
+        <section class="loginCard usuarioCard acoesConta">
+            <button type="button" class="btnSair" id="btnSair">Sair da conta</button>
+            <button type="button" class="btnExcluir" id="btnExcluir">Excluir minha conta</button>
+        </section>
+    </main>
+
+    <footer>
+        <section class="textFooter"><strong style="color: #fff;">Projeto SavePoint</strong></section>
+    </footer>
+</body>
+
+<script src="scripts/auth.js"></script>
+<script src="scripts/scriptUsuario.js"></script>
+
+</html>

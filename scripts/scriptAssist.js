@@ -4,21 +4,12 @@ const HORA_ABRE = 8;
 const HORA_FECHA = 18; // último horário começa às 17h
 const CHAVE_STORAGE = "savepoint_agendamentos";
 
-const TIPOS = {
-  atendimento: {
-    nome: "Atendimento",
-    titulo: "Agendar atendimento",
-    pergunta: "Como podemos ajudar?"
-  },
-  assistencia: {
-    nome: "Assistência técnica",
-    titulo: "Agendar assistência técnica",
-    pergunta: "Qual equipamento e qual é o problema?"
-  }
+// Serviços que o cliente escolhe ao agendar a assistência técnica
+const SERVICOS = {
+  celulares: "Celulares",
+  computadores: "Computadores",
+  videogames: "Videogames"
 };
-
-// Horas dedicadas à assistência técnica; as demais são atendimento.
-const HORAS_ASSISTENCIA = [9, 10, 14, 15, 16];
 
 // Seg a sex: 8h às 18h | Sáb: 8h às 12h | Dom: fechado
 function horasDoDia(data) {
@@ -30,15 +21,11 @@ function horasDoDia(data) {
   return horas;
 }
 
-function tipoDoHorario(hora) {
-  return HORAS_ASSISTENCIA.includes(hora) ? "assistencia" : "atendimento";
-}
-
 /*
   TODO (backend): hoje os horários já ocupados por outros clientes são
   simulados (veja horarioOcupadoPorOutros) e os agendamentos do usuário ficam
   no localStorage. Para produção, troque por uma consulta ao Supabase:
-  uma tabela "agendamentos" (data, hora, tipo, nome, telefone, descricao)
+  uma tabela "agendamentos" (data, hora, servico, nome, telefone, descricao)
   e carregue as linhas da semana exibida em vez de usar estas funções.
 */
 function horarioOcupadoPorOutros(chave) {
@@ -53,7 +40,7 @@ function horarioOcupadoPorOutros(chave) {
 
 const estado = {
   inicioSemana: inicioDaSemana(new Date()),
-  filtro: "todos",
+  filtro: "todos", // todos | livre | ocupado
   agendamentos: carregarAgendamentos(),
   slotAberto: null
 };
@@ -140,6 +127,7 @@ const dialogHorario = document.getElementById("dialogHorario");
 const blocoNovo = document.getElementById("blocoNovo");
 const blocoMeu = document.getElementById("blocoMeu");
 const meuResumo = document.getElementById("meuResumo");
+const agServico = document.getElementById("agServico");
 const agNome = document.getElementById("agNome");
 const agTelefone = document.getElementById("agTelefone");
 const agDescricao = document.getElementById("agDescricao");
@@ -148,6 +136,8 @@ const erroAg = document.getElementById("erroAg");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const btnCancelar = document.getElementById("btnCancelar");
 const btnFechar = document.getElementById("btnFechar");
+
+agDescricaoLabel.textContent = "Descreva o problema do equipamento (opcional)";
 
 /* ===================== Renderização ===================== */
 
@@ -158,6 +148,7 @@ function el(tag, classe, texto) {
   return e;
 }
 
+// livre | ocupado (de outro cliente) | meu (agendado por você) | passado
 function statusDoSlot(data, hora) {
   const chave = chaveSlot(data, hora);
   if (estado.agendamentos[chave]) return "meu";
@@ -166,28 +157,37 @@ function statusDoSlot(data, hora) {
   return "livre";
 }
 
-function criarSlot(data, hora) {
-  const tipo = tipoDoHorario(hora);
-  const status = statusDoSlot(data, hora);
+// O filtro "Ocupados" inclui os horários que você mesmo agendou
+function passaNoFiltro(status) {
+  if (estado.filtro === "todos") return true;
+  if (estado.filtro === "livre") return status === "livre";
+  return status === "ocupado" || status === "meu";
+}
 
-  const botao = el("button", `slot ${status} ${tipo}`);
+function criarSlot(data, hora, status) {
+  const botao = el("button", `slot ${status}`);
   botao.type = "button";
   botao.appendChild(el("span", "slotHora", rotuloHora(hora)));
-  botao.appendChild(el("span", "slotTipo", TIPOS[tipo].nome));
+  botao.appendChild(el("span", "slotTipo", "Assistência técnica"));
 
-  const textoStatus = {
+  let textoStatus = {
     livre: "Disponível",
-    ocupado: "Indisponível",
+    ocupado: "Ocupado",
     passado: "Encerrado",
     meu: "Seu agendamento"
   }[status];
+
+  if (status === "meu") {
+    const servico = SERVICOS[estado.agendamentos[chaveSlot(data, hora)].servico];
+    if (servico) textoStatus += ` · ${servico}`;
+  }
   botao.appendChild(el("span", "slotStatus", textoStatus));
 
   const dataTexto = data.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" });
-  botao.setAttribute("aria-label", `${TIPOS[tipo].nome}, ${dataTexto}, ${rotuloHora(hora)}: ${textoStatus}`);
+  botao.setAttribute("aria-label", `Assistência técnica, ${dataTexto}, ${rotuloHora(hora)}: ${textoStatus}`);
 
   if (status === "livre" || status === "meu") {
-    botao.addEventListener("click", () => abrirDialog(data, hora, tipo, status));
+    botao.addEventListener("click", () => abrirDialog(data, hora, status));
   } else {
     botao.disabled = true;
   }
@@ -218,7 +218,8 @@ function renderizar() {
   }
   corpoCalendario.appendChild(colHoras);
 
-  let disponiveis = { atendimento: 0, assistencia: 0 };
+  let disponiveis = 0;
+  let ocupados = 0;
 
   dias.forEach((dia) => {
     const horasAbertas = horasDoDia(dia);
@@ -227,10 +228,10 @@ function renderizar() {
     for (let h = HORA_ABRE; h < HORA_FECHA; h++) {
       const celula = el("div", "celula");
       if (horasAbertas.includes(h)) {
-        const tipo = tipoDoHorario(h);
-        if (statusDoSlot(dia, h) === "livre") disponiveis[tipo]++;
-        const visivel = estado.filtro === "todos" || estado.filtro === tipo;
-        celula.appendChild(visivel ? criarSlot(dia, h) : el("div", "slotVazio"));
+        const status = statusDoSlot(dia, h);
+        if (status === "livre") disponiveis++;
+        if (status === "ocupado" || status === "meu") ocupados++;
+        celula.appendChild(passaNoFiltro(status) ? criarSlot(dia, h, status) : el("div", "slotVazio"));
       }
       col.appendChild(celula);
     }
@@ -248,14 +249,13 @@ function renderizar() {
   });
 
   resumoEl.textContent =
-    `Nesta semana: ${disponiveis.atendimento} horários de atendimento e ` +
-    `${disponiveis.assistencia} de assistência técnica disponíveis.`;
+    `Nesta semana: ${disponiveis} horários disponíveis e ${ocupados} ocupados para assistência técnica.`;
 }
 
 /* ===================== Diálogo ===================== */
 
-function abrirDialog(data, hora, tipo, status) {
-  estado.slotAberto = { data, hora, tipo, chave: chaveSlot(data, hora) };
+function abrirDialog(data, hora, status) {
+  estado.slotAberto = { data, hora, chave: chaveSlot(data, hora) };
   erroAg.textContent = "";
 
   const dataTexto = data.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" });
@@ -263,16 +263,16 @@ function abrirDialog(data, hora, tipo, status) {
 
   if (status === "meu") {
     const ag = estado.agendamentos[estado.slotAberto.chave];
+    const servico = SERVICOS[ag.servico] || "serviço não informado";
     dialogTitulo.textContent = "Seu agendamento";
-    meuResumo.textContent = `${TIPOS[tipo].nome} em nome de ${ag.nome}. Contato: ${ag.telefone}.` +
+    meuResumo.textContent = `Assistência técnica (${servico}) em nome de ${ag.nome}. Contato: ${ag.telefone}.` +
       (ag.descricao ? ` Observação: ${ag.descricao}` : "");
     blocoNovo.hidden = true;
     blocoMeu.hidden = false;
     btnConfirmar.hidden = true;
     btnCancelar.hidden = false;
   } else {
-    dialogTitulo.textContent = TIPOS[tipo].titulo;
-    agDescricaoLabel.textContent = TIPOS[tipo].pergunta;
+    dialogTitulo.textContent = "Agendar assistência técnica";
     formAg.reset();
     blocoNovo.hidden = false;
     blocoMeu.hidden = true;
@@ -284,9 +284,15 @@ function abrirDialog(data, hora, tipo, status) {
 
 formAg.addEventListener("submit", (evento) => {
   evento.preventDefault();
+  const servico = agServico.value;
   const nome = agNome.value.trim();
   const telefone = agTelefone.value.trim();
 
+  if (!servico) {
+    erroAg.textContent = "Escolha o serviço: celulares, computadores ou videogames.";
+    agServico.focus();
+    return;
+  }
   if (!nome) {
     erroAg.textContent = "Digite seu nome.";
     agNome.focus();
@@ -298,11 +304,10 @@ formAg.addEventListener("submit", (evento) => {
     return;
   }
 
-  const { chave, tipo } = estado.slotAberto;
-  estado.agendamentos[chave] = {
+  estado.agendamentos[estado.slotAberto.chave] = {
+    servico,
     nome,
     telefone,
-    tipo,
     descricao: agDescricao.value.trim()
   };
   salvarAgendamentos();
